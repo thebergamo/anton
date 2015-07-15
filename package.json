@@ -25,8 +25,8 @@
   "dependencies": {
     "bluebird": "^2.9.32",
     "bull": "^0.4.0",
+    "lodash": "^3.10.0",
     "mongoose": "^4.0.6",
-    "mustache": "^2.1.2",
-    "sendgrid": "^1.8.0"
+    "sendgrid-mustacher": "^1.0.1"
   }
 }
