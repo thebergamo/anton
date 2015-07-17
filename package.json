@@ -4,7 +4,7 @@
   "description": "Fantastic Job Queue Worker",
   "main": "index.js",
   "scripts": {
-    "test": "scripts/tests.sh"
+    "test": "scripts/test.sh"
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,11 @@
     "lodash": "^3.10.0",
     "mongoose": "^4.0.6",
     "sendgrid-mustacher": "^1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^3.1.0",
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.17",
+    "mocha": "^2.2.5"
   }
 }

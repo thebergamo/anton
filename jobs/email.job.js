@@ -6,22 +6,34 @@ module.exports = function(Queue){
 	var email = Queue('email');
 
 	email.process(function(job, done){
-		var sendgrid = new SendgridMustacher(job.data.credentials.sendgrid_api_key);
-		var raw = job.data['email'];
-		var data = raw['data'];
-		console.log(raw);
-		job.progress('Running');
-
 		return Promise
 		.bind(this)
 		.then(function(){
+		
+			if(_.isEmpty(job.data.credentials) || _.isEmpty(job.data.credentials.sendgrid_api_key)){
+				throw new TypeError('Sendgrid credentials cannot be empty!');
+			}
+
+			if(_.isEmpty(job.data['email'])){
+				throw new TypeError('Email data cannot be empty!');
+			}
+
+			var sendgrid = new SendgridMustacher(job.data.credentials.sendgrid_api_key);
+			var raw = job.data['email'];
+			var data = raw['data'];
+			job.progress('Running');
+
 			return sendgrid.sendBatch(raw, data);
+		})
+		.catch(function(err){
+			job.progress('Error');
+			return done(err);
 		})
 		.then(function(json){
 			job.data.results = { returnable: json};
 			job.progress('Done');
-		})
-		.finally(done);
+			return done();
+		});
 	});
 
 	return email;
