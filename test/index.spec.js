@@ -48,7 +48,7 @@ describe('Anton module', function(){
 	});
 
 
-	describe('#createJob', function(){
+	describe('#createJob()', function(){
 		describe('should throw an ReferenceError if the job is not available', function(){
 			var error;
 			before(function(done){
@@ -214,5 +214,62 @@ describe('Anton module', function(){
 		});
 	});
 
+	describe('#deleteJob()', function(){
+		describe('when a job not found', function(){
+			var error;
+			before(function(done){
+				anton.deleteJob('email.job', 12)
+				.catch(function(err){
+					error = err;
+					done();
+				});
+			})
 
+
+			it('should error is an Type error', function(){
+				expect(error).to.be.instanceof(TypeError);
+			});
+			
+			it('should error have the correct message', function(){
+				expect(error.message).to.be.eql('Job not found.');
+			});
+		});
+
+		describe('when a job are deleted', function(){
+			var id, retId;
+			before(function(done){
+				anton.clearJobs('email.job');
+				anton.jobs['email.job'].removeAllListeners();
+				anton.jobs['email.job'].on('removed', function(job){
+					retId = job.jobId;
+					console.log(retId);
+					return done();
+				});
+				anton.createJob('email.job', {
+					email: {
+						subject: 'Just a simple test',
+						from: 'noreply@antonproj.org',
+						text: 'Hello {{name}}',
+						html: '<html><body>Hello {{name}}</body></html>',
+						data: [{ 
+							to: 'marcos@thedon.com.br', 
+							name: 'Marcos'
+						}]
+					},
+					credentials: {
+						sendgrid_api_key: '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'
+					}
+				})
+				.then(function(job){
+					id = job.jobId;
+					anton.deleteJob('email.job', id);
+				});
+			});
+
+			it('should returned job have the same Id', function(){
+				expect(retId).to.be.eql(id);
+			});
+
+		});
+	});
 });
