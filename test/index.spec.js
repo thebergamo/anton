@@ -1,5 +1,6 @@
+/*eslint-env mocha */
+
 var expect = require('chai').expect;
-var Promise = require('bluebird');
 var Anton = require('../lib/anton');
 var Postback = require('../lib/postback');
 
@@ -182,7 +183,7 @@ describe('Anton module', function(){
 				});	
 
 				anton.createJob('email.job', {
-				   	email: {
+					email: {
 						subject: 'Just a simple test',
 						from: 'noreply@antonproj.org',
 						text: 'Hello {{name}}',
@@ -193,7 +194,7 @@ describe('Anton module', function(){
 						}]
 					},
 					credentials: {
-						sendgrid_api_key: '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'
+						sendgrid_api_key: process.env.SENDGRID_API_KEY
 					}
 				});
 			});	
@@ -217,11 +218,10 @@ describe('Anton module', function(){
 	describe('#deleteJob()', function(){
 		describe('when a job not found', function(){
 			var error;
-			before(function(done){
-				anton.deleteJob('email.job', 12)
+			before(function(){
+				return anton.deleteJob('email.job', 12)
 				.catch(function(err){
 					error = err;
-					done();
 				});
 			})
 
@@ -242,7 +242,6 @@ describe('Anton module', function(){
 				anton.jobs['email.job'].removeAllListeners();
 				anton.jobs['email.job'].on('removed', function(job){
 					retId = job.jobId;
-					console.log(retId);
 					return done();
 				});
 				anton.createJob('email.job', {
@@ -257,7 +256,7 @@ describe('Anton module', function(){
 						}]
 					},
 					credentials: {
-						sendgrid_api_key: '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'
+						sendgrid_api_key: process.env.SENDGRID_API_KEY
 					}
 				})
 				.then(function(job){

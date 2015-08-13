@@ -23,11 +23,11 @@
   },
   "homepage": "https://github.com/antonproject/anton-core",
   "dependencies": {
-    "bluebird": "^2.9.32",
-    "bull": "^0.4.0",
-    "lodash": "^3.10.0",
-    "mongoose": "^4.0.6",
-    "sendgrid-mustacher": "^1.0.1"
+    "bluebird": "2.9.32",
+    "bull": "0.4.0",
+    "lodash": "3.10.0",
+    "mongoose": "4.0.6",
+    "sendgrid-mustacher": "1.0.1"
   },
   "devDependencies": {
     "chai": "^3.1.0",

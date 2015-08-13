@@ -30,7 +30,7 @@ module.exports = function(Queue){
 			return done(err);
 		})
 		.then(function(json){
-			job.data.results = { returnable: json};
+			job.data.results = { returnable: json, jobId: job.jobId };
 			job.progress('Done');
 			return done();
 		});
