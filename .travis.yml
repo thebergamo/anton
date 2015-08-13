@@ -4,5 +4,5 @@ node_js:
   - "0.10"
 env:
   - EXPORT_COVERAGE=1
-
+services: redis
 
