@@ -20,16 +20,16 @@ describe('Anton module', function(){
 			expect(anton).to.be.an('object');
 		});
 
-		it('should initialize an empty job object', function(){
-			expect(anton).to.have.property('jobs');
-			expect(anton.jobs).to.be.an('object');
-			expect(anton.jobs).to.be.empty;
+		it('should initialize an empty tasks object', function(){
+			expect(anton).to.have.property('tasks');
+			expect(anton.tasks).to.be.an('object');
+			expect(anton.tasks).to.be.empty;
 		});
 
 
 		it('should initialize an empty postack object', function(){
 			expect(anton).to.have.property('postback');
-			expect(anton.jobs).to.be.an('object');
+			expect(anton.postback).to.be.an('object');
 		});
 	});
 
@@ -49,7 +49,7 @@ describe('Anton module', function(){
 			});
 			
 			it('should error have the correct message', function(){
-				expect(error.message).to.be.eql('Job type: coffee.job is unavailable');
+				expect(error.message).to.be.eql('Task type: coffee.job is unavailable');
 			});
 		});
 
@@ -76,7 +76,7 @@ describe('Anton module', function(){
 			var error;
 			before(function(done){
 				anton
-				.loadJob(emailJob)
+				.loadTask(emailJob)
 				.createJob('email.job')
 				.catch(function(err){
 					error = err;
@@ -116,8 +116,8 @@ describe('Anton module', function(){
 			var error;
 			before(function(done){
 				anton.clearJobs('email.job');
-				anton.jobs['email.job'].removeAllListeners();
-				anton.jobs['email.job'].on('failed', function(job, err){
+				anton.tasks['email.job'].removeAllListeners();
+				anton.tasks['email.job'].on('failed', function(job, err){
 					error = err;
 					return done();
 				});
@@ -138,8 +138,8 @@ describe('Anton module', function(){
 			var error;
 			before(function(done){
 				anton.clearJobs('email.job');
-				anton.jobs['email.job'].removeAllListeners();
-				anton.jobs['email.job'].on('failed', function(job, err){
+				anton.tasks['email.job'].removeAllListeners();
+				anton.tasks['email.job'].on('failed', function(job, err){
 					error = err;
 					return done();
 				});
@@ -160,8 +160,8 @@ describe('Anton module', function(){
 			var result;
 			before(function(done){
 				anton.clearJobs('email.job');
-				anton.jobs['email.job'].removeAllListeners();
-				anton.jobs['email.job'].on('completed', function(job){
+				anton.tasks['email.job'].removeAllListeners();
+				anton.tasks['email.job'].on('completed', function(job){
 					result = job.data.results;	
 					return done();
 				});	
@@ -223,8 +223,8 @@ describe('Anton module', function(){
 			var id, retId;
 			before(function(done){
 				anton.clearJobs('email.job');
-				anton.jobs['email.job'].removeAllListeners();
-				anton.jobs['email.job'].on('removed', function(job){
+				anton.tasks['email.job'].removeAllListeners();
+				anton.tasks['email.job'].on('removed', function(job){
 					retId = job.jobId;
 					return done();
 				});
@@ -252,7 +252,6 @@ describe('Anton module', function(){
 			it('should returned job have the same Id', function(){
 				expect(retId).to.be.eql(id);
 			});
-
 		});
 	});
 });

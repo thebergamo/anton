@@ -1,7 +1,7 @@
 module.exports = require('./lib/anton');
 module.exports.sample = { 
-	'jobs': { 
-		'email': require('./jobs/email.job') 
+	'tasks': { 
+		'email': require('./tasks/email.job') 
 	}, 
 	'transport': {
 		'email': require('./transporter/email') 
