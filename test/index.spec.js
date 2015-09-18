@@ -3,7 +3,7 @@
 var expect = require('chai').expect;
 var Anton = require('../lib/anton');
 var Postback = require('../lib/postback');
-var emailJob = require('../jobs/email.job');
+var emailJob = require('../tasks/email.job');
 
 // Create a new instance of Anton
 var anton = new Anton();
