@@ -1,4 +1,4 @@
-# anton
+# anton2
 [![Build Status](https://travis-ci.org/antonproject/anton.svg)](https://travis-ci.org/antonproject/anton) [![Coverage Status](https://coveralls.io/repos/antonproject/anton/badge.svg?branch=master)](https://coveralls.io/r/antonproject/anton?branch=master)
 
 Anton is designed to help you to process hard jobs made easy =D
@@ -6,7 +6,7 @@ Anton is designed to help you to process hard jobs made easy =D
 ##Instalation
 
 ```javascript
-npm install anton
+npm install anton2
 ```
 
 ##How it works
@@ -23,7 +23,7 @@ When the jobs is done, with errors or not, the postback is called and notify you
 ##How to use
 
 ```javascript
-var Anton = require('anton');
+var Anton = require('anton2');
 var emailJob = Anton.sample.tasks.email; // Load a simple job that send emails in batch.
 var transporter = Anton.sample.transport.email; // Load a simple transport for the postback information about the jobs finished. On this case send to your email.
 

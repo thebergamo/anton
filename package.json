@@ -1,5 +1,5 @@
 {
-  "name": "anton-core",
+  "name": "anton2",
   "version": "1.0.0",
   "description": "Fantastic Job Queue Worker",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antonproject/anton-core.git"
+    "url": "https://github.com/antonproject/anton.git"
   },
   "keywords": [
     "Fantastic",
@@ -19,9 +19,9 @@
   "author": "Marcos Bérgamo <marcos@thedon.com.br>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/antonproject/anton-core/issues"
+    "url": "https://github.com/antonproject/anton/issues"
   },
-  "homepage": "https://github.com/antonproject/anton-core",
+  "homepage": "https://github.com/antonproject/anton",
   "dependencies": {
     "bluebird": "2.9.32",
     "bull": "0.4.0",
