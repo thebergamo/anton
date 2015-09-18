@@ -3,7 +3,7 @@ var Promise = require('bluebird');
 var SendgridMustacher = require('sendgrid-mustacher');
 
 module.exports = function(Queue){
-	var email = Queue('email');
+	var email = Queue('email.job');
 
 	email.process(function(job, done){
 		return Promise

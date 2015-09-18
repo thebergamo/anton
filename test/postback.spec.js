@@ -1,9 +1,15 @@
 /*eslint-env mocha */
 
 var expect = require('chai').expect;
+var Anton = require('../lib/anton');
 var Postback = require('../lib/postback');
+var EmailTransporter = require('../transporter/email');
 
-var postback = new Postback();
+var anton = new Anton();
+
+anton.loadTransport('email', EmailTransporter);
+
+var postback = new Postback(anton);
 
 describe('Postback module', function(){
 	describe('#constructor()', function(){

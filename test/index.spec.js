@@ -3,6 +3,7 @@
 var expect = require('chai').expect;
 var Anton = require('../lib/anton');
 var Postback = require('../lib/postback');
+var emailJob = require('../jobs/email.job');
 
 // Create a new instance of Anton
 var anton = new Anton();
@@ -29,25 +30,8 @@ describe('Anton module', function(){
 		it('should initialize an empty postack object', function(){
 			expect(anton).to.have.property('postback');
 			expect(anton.jobs).to.be.an('object');
-			expect(anton.jobs).to.be.empty;
 		});
 	});
-
-	describe('#initialize()', function(){
-		before(function(){
-			return anton.initialize();
-		});
-
-		it('should jobs are loaded', function(){
-			expect(anton.jobs).to.not.be.empty;
-		});
-
-		it('should postback are instanciated', function(){
-			expect(anton).to.have.property('postback');
-			expect(anton.postback).to.be.an.instanceof(Postback);
-		});
-	});
-
 
 	describe('#createJob()', function(){
 		describe('should throw an ReferenceError if the job is not available', function(){
@@ -91,7 +75,9 @@ describe('Anton module', function(){
 		describe('should throw an TypeError if the data is undefined', function(){
 			var error;
 			before(function(done){
-				anton.createJob('email.job')
+				anton
+				.loadJob(emailJob)
+				.createJob('email.job')
 				.catch(function(err){
 					error = err;
 				})
@@ -106,7 +92,6 @@ describe('Anton module', function(){
 				expect(error.message).to.be.eql('Data cannot be empty!');
 			});
 		});
-
 
 		describe('should throw an TypeError if the data is empty', function(){
 			var error;
@@ -126,7 +111,6 @@ describe('Anton module', function(){
 				expect(error.message).to.be.eql('Data cannot be empty!');
 			});
 		});
-
 
 		describe('should job failed when no credentials are sent', function(){
 			var error;
