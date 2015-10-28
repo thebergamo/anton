@@ -3,13 +3,13 @@
 
 Anton is designed to help you to process hard jobs made easy =D
 
-##Instalation
+## Instalation
 
 ```javascript
 npm install anton2
 ```
 
-##How it works
+## How it works
 Anton is a queue manager build on top of [bull](https://npmjs.com/bull) that simplify the way to process hard jobs. The lifecycle in Anton is:
 
 - Register your tasks.
@@ -20,7 +20,7 @@ Anton is a queue manager build on top of [bull](https://npmjs.com/bull) that sim
 After the bootstrap of Anton(loading tasks and transporters) you can create your jobs.
 When the jobs is done, with errors or not, the postback is called and notify you about the result of the job.
 
-##How to use
+## How to use
 
 ```javascript
 var Anton = require('anton2');
@@ -61,22 +61,22 @@ anton.jobs['email.job'].on('failed', function(job, error){
 
 ```
 
-##Public Methods
+## Public Methods
 
-###loadTask(task) -> this
+### loadTask(task) -> this
 The task need be a function that will receive a Task object to create a new taskQueue. Redis connection information will be setted in the task function. See more in [this example](https://github.com/antonproject/anton/blob/master/task/email.job.js)
 
-###loadTransporter(transporter) - this
+### loadTransporter(transporter) - this
 The transporter need be a function that will receibe a data object with the information about the job results(data.results) and send to anywhere you must be! See more in [this example](https://github.com/antonproject/anton/blob/master/transporter/email.js)
 
-###createJobs(type, data) -> Promise
+### createJobs(type, data) -> Promise
 Both type and data are required to create an job. The return is a promise with a job object where you can find the jobId.
 
-###deleteJob(type, id) -> Promise
+### deleteJob(type, id) -> Promise
 Both type and id are required to delete a job. The return will be a promise with the job object of the removed job.
 
-###clearJobs(taskName) -> Promise
+### clearJobs(taskName) -> Promise
 taskName is required to identify the right task and clear the jobs errored with least 5 seconds. The return will be a list with the removed jobs.
 
-##Contribuing
+## Contribuing
 All help is very welcomed! Just send a [Pull Requests](https://github.com/antonproject/anton/pulls) or open an [Issue](https://github.com/antonproject/anton/issues)
